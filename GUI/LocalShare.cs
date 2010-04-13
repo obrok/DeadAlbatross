@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using DeadAlbatross.Commons;
 
 namespace DeadAlbatross.GUI
 {
@@ -10,7 +11,7 @@ namespace DeadAlbatross.GUI
     {
         public string FilePath;
         public string Name;
-        public string Size
+        public string StringSize
         {
             get
             {
@@ -29,6 +30,13 @@ namespace DeadAlbatross.GUI
                 return size + " GB";
 
                 
+            }
+        }
+        public long Size
+        {
+            get
+            {
+                return new FileInfo(FilePath).Length;
             }
         }
 
@@ -62,6 +70,11 @@ namespace DeadAlbatross.GUI
         public override int GetHashCode()
         {
             return FilePath.GetHashCode() + Name.GetHashCode();
+        }
+
+        public static implicit operator Share(LocalShare share)
+        {
+            return new Share { Name = share.Name, Size = share.Size };
         }
     }
 }

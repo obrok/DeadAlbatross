@@ -6,30 +6,42 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DeadAlbatross.Commons;
 
 namespace DeadAlbatross.GUI
 {
     public partial class MainShareForm : Form
     {
         private HashSet<LocalShare> localShares;
+        private HashSet<Share> shares;
 
         public MainShareForm()
         {
             localShares = new HashSet<LocalShare>();
+            shares = new HashSet<Share>();
+            
             InitializeComponent();
+
+            InitShares();
         }
 
-        private void Reload()
+        private void InitShares()
         {
-            locallySharedListView.Items.Clear();
+            shares = LoadShares();
+            ReloadShares();
+        }
+
+        private void ReloadLocalShares()
+        {
+            localSharesListView.Items.Clear();
 
             foreach (LocalShare share in localShares)
             {
                 ListViewItem item = new ListViewItem(share.Name);
-                item.SubItems.Add(share.Size.ToString());
+                item.SubItems.Add(share.StringSize.ToString());
                 item.SubItems.Add(share.FilePath);
 
-                locallySharedListView.Items.Add(item);
+                localSharesListView.Items.Add(item);
             }
         }
 
@@ -43,8 +55,53 @@ namespace DeadAlbatross.GUI
                 {
                     localShares.Add(new LocalShare(item));
                 }
-                Reload();
+                ReloadLocalShares();
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (toolStripButton1.Checked)
+            {
+                shares = LoadShares();
+            }
+            else
+            {
+                shares.Clear();
+            }
+
+            ReloadShares();
+        }
+
+        private void ReloadShares()
+        {
+            sharesListView.Items.Clear();
+
+            foreach (Share share in shares)
+            {
+                ListViewItem item = new ListViewItem(share.Name);
+                item.SubItems.Add(share.Size.ToString());
+
+                sharesListView.Items.Add(item);
+            }
+        }
+
+        private HashSet<Share> LoadShares()
+        {
+            result.Add(new Share { Name = "cos", Size = 10 });
+            result.Add(new Share { Name = "cos innego", Size = 10000 });
+            result.Add(new Share { Name = "cos innego", Size = 10000 });
+            return result;
+        }
+
+        public HashSet<Share> GetShares()
+        {
+            HashSet<Share> result = new HashSet<Share>();
+            foreach (LocalShare share in localShares)
+            {
+                result.Add(share);
+            }
+            return result;
         }
     }
 }
