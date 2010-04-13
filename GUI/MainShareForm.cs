@@ -88,6 +88,7 @@ namespace DeadAlbatross.GUI
 
         private HashSet<Share> LoadShares()
         {
+            HashSet<Share> result = new HashSet<Share>();
             result.Add(new Share { Name = "cos", Size = 10 });
             result.Add(new Share { Name = "cos innego", Size = 10000 });
             result.Add(new Share { Name = "cos innego", Size = 10000 });
