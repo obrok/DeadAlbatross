@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DeadAlbatross.Commons;
+using DeadAlbatross.Client;
 
 namespace DeadAlbatross.GUI
 {
@@ -14,11 +15,13 @@ namespace DeadAlbatross.GUI
     {
         private HashSet<LocalShare> localShares;
         private HashSet<Share> shares;
+        private ServerClient client;
 
         public MainShareForm()
         {
             localShares = new HashSet<LocalShare>();
             shares = new HashSet<Share>();
+            client = new ServerClient();
             
             InitializeComponent();
 
@@ -88,10 +91,13 @@ namespace DeadAlbatross.GUI
 
         private HashSet<Share> LoadShares()
         {
+            List<Share> shares = new List<Share>();
+            foreach(LocalShare share in localShares)
+                shares.Add(share);
+            client.ReportShares(shares.ToArray());
             HashSet<Share> result = new HashSet<Share>();
-            result.Add(new Share { Name = "cos", Size = 10 });
-            result.Add(new Share { Name = "cos innego", Size = 10000 });
-            result.Add(new Share { Name = "cos innego", Size = 10000 });
+            foreach (Share share in client.ListShares())
+                result.Add(share);
             return result;
         }
 

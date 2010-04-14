@@ -8,117 +8,62 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DeadAlbatross.Commons
+namespace DeadAlbatross.Client
 {
-    using System.Runtime.Serialization;
-    
-    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://DeadAlbatross.Server", ConfigurationName = "Server")]
+    public interface Server
+    {
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://DeadAlbatross.Server/Server/ListShares", ReplyAction = "http://DeadAlbatross.Server/Server/ListSharesResponse")]
+        DeadAlbatross.Commons.Share[] ListShares();
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://DeadAlbatross.Server/Server/ReportShares", ReplyAction = "http://DeadAlbatross.Server/Server/ReportSharesResponse")]
+        void ReportShares(DeadAlbatross.Commons.Share[] shares);
+    }
+
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public interface ServerChannel : Server, System.ServiceModel.IClientChannel
+    {
+    }
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Share", Namespace="http://schemas.datacontract.org/2004/07/DeadAlbatross.Commons")]
-    public partial struct Share : System.Runtime.Serialization.IExtensibleDataObject
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class ServerClient : System.ServiceModel.ClientBase<Server>, Server
     {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string NameField;
-        
-        private long SizeField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+
+        public ServerClient()
         {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
         }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this.NameField;
-            }
-            set
-            {
-                this.NameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Size
-        {
-            get
-            {
-                return this.SizeField;
-            }
-            set
-            {
-                this.SizeField = value;
-            }
-        }
-    }
-}
 
-
-[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-[System.ServiceModel.ServiceContractAttribute(Namespace="http://DeadAlbatross.Server", ConfigurationName="Server")]
-public interface Server
-{
-    
-    [System.ServiceModel.OperationContractAttribute(Action="http://DeadAlbatross.Server/Server/ListShares", ReplyAction="http://DeadAlbatross.Server/Server/ListSharesResponse")]
-    DeadAlbatross.Commons.Share[] ListShares();
-    
-    [System.ServiceModel.OperationContractAttribute(Action="http://DeadAlbatross.Server/Server/ReportShares", ReplyAction="http://DeadAlbatross.Server/Server/ReportSharesResponse")]
-    void ReportShares(DeadAlbatross.Commons.Share[] shares);
-}
-
-[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-public interface ServerChannel : Server, System.ServiceModel.IClientChannel
-{
-}
-
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-public partial class ServerClient : System.ServiceModel.ClientBase<Server>, Server
-{
-    
-    public ServerClient()
-    {
-    }
-    
-    public ServerClient(string endpointConfigurationName) : 
+        public ServerClient(string endpointConfigurationName) :
             base(endpointConfigurationName)
-    {
-    }
-    
-    public ServerClient(string endpointConfigurationName, string remoteAddress) : 
+        {
+        }
+
+        public ServerClient(string endpointConfigurationName, string remoteAddress) :
             base(endpointConfigurationName, remoteAddress)
-    {
-    }
-    
-    public ServerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        {
+        }
+
+        public ServerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) :
             base(endpointConfigurationName, remoteAddress)
-    {
-    }
-    
-    public ServerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        {
+        }
+
+        public ServerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
             base(binding, remoteAddress)
-    {
-    }
-    
-    public DeadAlbatross.Commons.Share[] ListShares()
-    {
-        return base.Channel.ListShares();
-    }
-    
-    public void ReportShares(DeadAlbatross.Commons.Share[] shares)
-    {
-        base.Channel.ReportShares(shares);
+        {
+        }
+
+        public DeadAlbatross.Commons.Share[] ListShares()
+        {
+            return base.Channel.ListShares();
+        }
+
+        public void ReportShares(DeadAlbatross.Commons.Share[] shares)
+        {
+            base.Channel.ReportShares(shares);
+        }
     }
 }
