@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using DeadAlbatross.Commons;
-
+using System.ServiceModel.Channels;
 namespace DeadAlbatross.Server
 {
     [ServiceContract(Namespace = "http://DeadAlbatross.Server")]
@@ -20,6 +20,11 @@ namespace DeadAlbatross.Server
         [OperationContract]
         public void ReportShares(Share[] shares)
         {
+            string address = (OperationContext.Current.
+                IncomingMessageProperties
+                    [RemoteEndpointMessageProperty.Name]
+                        as RemoteEndpointMessageProperty).Address;
+
             foreach (var item in shares)
             {
                 if (!_shares.ContainsKey(item))
@@ -27,13 +32,15 @@ namespace DeadAlbatross.Server
                     _shares.Add(item, new HashSet<string>());
                     System.Console.WriteLine(item.Name);
                 }
-                _shares[item].Add(item.ClientAddress);
+                _shares[item].Add(address);
             }
         }
 
         [OperationContract]
         public string[] RequestDownload(string hash)
         {
+
+
             Share index = new Share { Hash = hash };
             string[] result = new string[_shares[index].Count];
             _shares[index].CopyTo(result);

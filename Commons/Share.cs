@@ -10,7 +10,6 @@ namespace DeadAlbatross.Commons
         public String Name { get; set; }
         public long Size { get; set; }
         public String Hash { get; set; }
-        public String ClientAddress { get; set; }
 
         public Share()
         {

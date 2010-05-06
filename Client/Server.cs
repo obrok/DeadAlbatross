@@ -7,7 +7,8 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.Net;
+using System.Net.Sockets;
 namespace DeadAlbatross.Client
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -30,7 +31,7 @@ namespace DeadAlbatross.Client
     {
     }
 
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public partial class ServerClient : System.ServiceModel.ClientBase<Server>, Server
     {
@@ -66,10 +67,6 @@ namespace DeadAlbatross.Client
 
         public void ReportShares(DeadAlbatross.Commons.Share[] shares)
         {
-            foreach (var item in shares)
-            {
-                item.ClientAddress = "3";
-            }
             base.Channel.ReportShares(shares);
         }
 
