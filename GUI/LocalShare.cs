@@ -9,6 +9,8 @@ namespace DeadAlbatross.GUI
 {
     class LocalShare : IEquatable<LocalShare>
     {
+        private string _hash=null;
+
         public string FilePath;
         public string Name;
         public string StringSize
@@ -32,6 +34,53 @@ namespace DeadAlbatross.GUI
                 
             }
         }
+        public string Hash
+        {
+            get
+            {
+                if (_hash==null)
+                    _hash = GetSHA1Hash(FilePath);
+                return _hash;
+            }
+        }
+
+        private static string GetSHA1Hash(string pathName)
+        {
+            string strResult = "";
+            string strHashData = "";
+
+            byte[] arrbytHashValue;
+            System.IO.FileStream oFileStream = null;
+
+            System.Security.Cryptography.SHA1CryptoServiceProvider oSHA1Hasher =
+                       new System.Security.Cryptography.SHA1CryptoServiceProvider();
+
+            try
+            {
+                oFileStream = GetFileStream(pathName);
+                arrbytHashValue = oSHA1Hasher.ComputeHash(oFileStream);
+                oFileStream.Close();
+
+                strHashData = System.BitConverter.ToString(arrbytHashValue);
+                strHashData = strHashData.Replace("-", "");
+                strResult = strHashData;
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message, "Error!",
+                         System.Windows.Forms.MessageBoxButtons.OK,
+                         System.Windows.Forms.MessageBoxIcon.Error,
+                         System.Windows.Forms.MessageBoxDefaultButton.Button1);
+            }
+
+            return (strResult);
+        }
+        private static System.IO.FileStream GetFileStream(string pathName)
+        {
+            return (new System.IO.FileStream(pathName, System.IO.FileMode.Open,
+                      System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite));
+        }
+
         public long Size
         {
             get
@@ -62,7 +111,7 @@ namespace DeadAlbatross.GUI
 
         public bool Equals(LocalShare other)
         {
-            return FilePath.Equals(other.FilePath);
+            return Hash.Equals(other.Hash);
         }
 
         #endregion
@@ -74,7 +123,7 @@ namespace DeadAlbatross.GUI
 
         public static implicit operator Share(LocalShare share)
         {
-            return new Share { Name = share.Name, Size = share.Size };
+            return new Share { Name = share.Name, Size = share.Size, Hash = share.Hash };
         }
     }
 }

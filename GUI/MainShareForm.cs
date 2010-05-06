@@ -43,6 +43,7 @@ namespace DeadAlbatross.GUI
                 ListViewItem item = new ListViewItem(share.Name);
                 item.SubItems.Add(share.StringSize.ToString());
                 item.SubItems.Add(share.FilePath);
+                item.SubItems.Add(share.Hash);
 
                 localSharesListView.Items.Add(item);
             }

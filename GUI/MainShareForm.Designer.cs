@@ -42,6 +42,7 @@
             this.sharesListView = new System.Windows.Forms.ListView();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -114,7 +115,8 @@
             this.localSharesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader3,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader6});
             this.localSharesListView.Location = new System.Drawing.Point(6, 6);
             this.localSharesListView.Name = "localSharesListView";
             this.localSharesListView.Size = new System.Drawing.Size(712, 402);
@@ -169,6 +171,10 @@
             // 
             this.columnHeader5.Text = "Rozmiar";
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Hash";
+            // 
             // MainShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +209,7 @@
         private System.Windows.Forms.ListView sharesListView;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }
 
