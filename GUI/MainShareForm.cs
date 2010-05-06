@@ -14,13 +14,13 @@ namespace DeadAlbatross.GUI
     public partial class MainShareForm : Form
     {
         private HashSet<LocalShare> localShares;
-        private HashSet<Share> shares;
+        private List<Share> shares;
         private ServerClient client;
 
         public MainShareForm()
         {
             localShares = new HashSet<LocalShare>();
-            shares = new HashSet<Share>();
+            shares = new List<Share>();
             client = new ServerClient();
             
             InitializeComponent();
@@ -90,13 +90,13 @@ namespace DeadAlbatross.GUI
             }
         }
 
-        private HashSet<Share> LoadShares()
+        private List<Share> LoadShares()
         {
             List<Share> shares = new List<Share>();
             foreach(LocalShare share in localShares)
                 shares.Add(share);
             client.ReportShares(shares.ToArray());
-            HashSet<Share> result = new HashSet<Share>();
+            List<Share> result = new List<Share>();
             foreach (Share share in client.ListShares())
                 result.Add(share);
             return result;
@@ -110,6 +110,12 @@ namespace DeadAlbatross.GUI
                 result.Add(share);
             }
             return result;
+        }
+
+        private void downloadButton_Click(object sender, EventArgs e)
+        {
+            string[] addresses = client.RequestDownload(shares[sharesListView.SelectedIndices[0]].Hash);
+            MessageBox.Show(addresses[0]);
         }
     }
 }

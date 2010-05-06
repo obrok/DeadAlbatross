@@ -7,17 +7,14 @@ namespace DeadAlbatross.Server
     [ServiceContract(Namespace = "http://DeadAlbatross.Server")]
     class Server
     {
-        private static HashSet<Share> _shares = new HashSet<Share>();
+        private static Dictionary<Share, HashSet<string>> _shares = new Dictionary<Share, HashSet<string>>();
 
         [OperationContract]
         public Share[] ListShares()
         {
-            List<Share> result = new List<Share>();
-            foreach (var item in _shares)
-            {
-                result.Add(item);
-            }
-            return result.ToArray();
+            Share[] result = new Share[_shares.Keys.Count];
+            _shares.Keys.CopyTo(result, 0);
+            return result;
         }
 
         [OperationContract]
@@ -25,11 +22,22 @@ namespace DeadAlbatross.Server
         {
             foreach (var item in shares)
             {
-                if (_shares.Add(item))
+                if (!_shares.ContainsKey(item))
                 {
+                    _shares.Add(item, new HashSet<string>());
                     System.Console.WriteLine(item.Name);
                 }
+                _shares[item].Add(item.ClientAddress);
             }
+        }
+
+        [OperationContract]
+        public string[] RequestDownload(string hash)
+        {
+            Share index = new Share { Hash = hash };
+            string[] result = new string[_shares[index].Count];
+            _shares[index].CopyTo(result);
+            return result;
         }
     }
 }

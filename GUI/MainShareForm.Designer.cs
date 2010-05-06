@@ -38,11 +38,12 @@
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.downloadButton = new System.Windows.Forms.Button();
             this.sharesListView = new System.Windows.Forms.ListView();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -137,8 +138,13 @@
             // 
             this.columnHeader2.Text = "Ścieżka";
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Hash";
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.downloadButton);
             this.tabPage2.Controls.Add(this.sharesListView);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -147,6 +153,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Przeglądaj";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // downloadButton
+            // 
+            this.downloadButton.Location = new System.Drawing.Point(6, 367);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(75, 23);
+            this.downloadButton.TabIndex = 1;
+            this.downloadButton.Text = "Download";
+            this.downloadButton.UseVisualStyleBackColor = true;
+            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
             // sharesListView
             // 
@@ -157,8 +173,9 @@
             this.columnHeader4,
             this.columnHeader5});
             this.sharesListView.Location = new System.Drawing.Point(6, 6);
+            this.sharesListView.MultiSelect = false;
             this.sharesListView.Name = "sharesListView";
-            this.sharesListView.Size = new System.Drawing.Size(712, 402);
+            this.sharesListView.Size = new System.Drawing.Size(712, 355);
             this.sharesListView.TabIndex = 0;
             this.sharesListView.UseCompatibleStateImageBehavior = false;
             this.sharesListView.View = System.Windows.Forms.View.Details;
@@ -170,10 +187,6 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Rozmiar";
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Hash";
             // 
             // MainShareForm
             // 
@@ -210,6 +223,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Button downloadButton;
     }
 }
 

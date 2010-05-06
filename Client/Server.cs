@@ -20,6 +20,9 @@ namespace DeadAlbatross.Client
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://DeadAlbatross.Server/Server/ReportShares", ReplyAction = "http://DeadAlbatross.Server/Server/ReportSharesResponse")]
         void ReportShares(DeadAlbatross.Commons.Share[] shares);
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://DeadAlbatross.Server/Server/RequestDownload", ReplyAction = "http://DeadAlbatross.Server/Server/RequestDownloadResponse")]
+        string[] RequestDownload(string hash);
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -63,7 +66,16 @@ namespace DeadAlbatross.Client
 
         public void ReportShares(DeadAlbatross.Commons.Share[] shares)
         {
+            foreach (var item in shares)
+            {
+                item.ClientAddress = "3";
+            }
             base.Channel.ReportShares(shares);
+        }
+
+        public string[] RequestDownload(string hash)
+        {
+            return base.Channel.RequestDownload(hash);
         }
     }
 }
