@@ -84,6 +84,7 @@ namespace DeadAlbatross.GUI
             {
                 ListViewItem item = new ListViewItem(share.Name);
                 item.SubItems.Add(share.Size.ToString());
+                item.SubItems.Add(share.Hash);
 
                 sharesListView.Items.Add(item);
             }

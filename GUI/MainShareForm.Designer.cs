@@ -32,6 +32,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.connectButton = new System.Windows.Forms.ToolStripButton();
+            this.refreshButton = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.localSharesListView = new System.Windows.Forms.ListView();
@@ -44,7 +45,7 @@
             this.sharesListView = new System.Windows.Forms.ListView();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.refreshButton = new System.Windows.Forms.ToolStripButton();
+            this.Hash = new System.Windows.Forms.ColumnHeader();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -83,6 +84,17 @@
             this.connectButton.Size = new System.Drawing.Size(45, 22);
             this.connectButton.Text = "Połącz";
             this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.refreshButton.Enabled = false;
+            this.refreshButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshButton.Image")));
+            this.refreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(55, 22);
+            this.refreshButton.Text = "Odśwież";
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // tabControl1
             // 
@@ -172,7 +184,8 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.sharesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.Hash});
             this.sharesListView.Location = new System.Drawing.Point(6, 6);
             this.sharesListView.MultiSelect = false;
             this.sharesListView.Name = "sharesListView";
@@ -190,16 +203,9 @@
             // 
             this.columnHeader5.Text = "Rozmiar";
             // 
-            // refreshButton
+            // Hash
             // 
-            this.refreshButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.refreshButton.Enabled = false;
-            this.refreshButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshButton.Image")));
-            this.refreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(55, 22);
-            this.refreshButton.Text = "Odśwież";
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            this.Hash.Text = "Hash";
             // 
             // MainShareForm
             // 
@@ -238,6 +244,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.ToolStripButton refreshButton;
+        private System.Windows.Forms.ColumnHeader Hash;
     }
 }
 
