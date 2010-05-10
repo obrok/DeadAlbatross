@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainShareForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.connectButton = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.localSharesListView = new System.Windows.Forms.ListView();
@@ -44,6 +45,7 @@
             this.sharesListView = new System.Windows.Forms.ListView();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -54,7 +56,7 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton2,
-            this.toolStripButton1});
+            this.connectButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(756, 25);
@@ -71,18 +73,16 @@
             this.toolStripButton2.Text = "toolStripButton2";
             this.toolStripButton2.Click += new System.EventHandler(this.shareFilesButton_Click);
             // 
-            // toolStripButton1
+            // connectButton
             // 
-            this.toolStripButton1.Checked = true;
-            this.toolStripButton1.CheckOnClick = true;
-            this.toolStripButton1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.connectButton.CheckOnClick = true;
+            this.connectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.connectButton.Image = ((System.Drawing.Image)(resources.GetObject("connectButton.Image")));
+            this.connectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.connectButton.Name = "connectButton";
+            this.connectButton.Size = new System.Drawing.Size(45, 22);
+            this.connectButton.Text = "Połącz";
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
             // tabControl1
             // 
@@ -190,6 +190,10 @@
             // 
             this.columnHeader5.Text = "Rozmiar";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // MainShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,7 +216,7 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton connectButton;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -226,6 +230,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

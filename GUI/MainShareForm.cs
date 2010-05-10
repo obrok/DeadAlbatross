@@ -25,14 +25,6 @@ namespace DeadAlbatross.GUI
             client = new ServerClient();
             
             InitializeComponent();
-
-            InitShares();
-        }
-
-        private void InitShares()
-        {
-            shares = LoadShares();
-            ReloadShares();
         }
 
         private void ReloadLocalShares()
@@ -66,18 +58,20 @@ namespace DeadAlbatross.GUI
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void connectButton_Click(object sender, EventArgs e)
         {
-            if (toolStripButton1.Checked)
+            if (connectButton.Checked)
             {
-                shares = LoadShares();
+                connectButton.Text = "Rozłącz";
+                timer1.Start();
             }
             else
             {
+                connectButton.Text = "Połącz";
+                timer1.Stop();
                 shares.Clear();
+                ReloadShares();
             }
-
-            ReloadShares();
         }
 
         private void ReloadShares()
@@ -141,6 +135,12 @@ namespace DeadAlbatross.GUI
             {
                 downloadButton.Enabled = true;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            shares = LoadShares();
+            ReloadShares();
         }
     }
 }
