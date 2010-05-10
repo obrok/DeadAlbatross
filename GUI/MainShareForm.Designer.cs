@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainShareForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -45,7 +44,7 @@
             this.sharesListView = new System.Windows.Forms.ListView();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.refreshButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -56,7 +55,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton2,
-            this.connectButton});
+            this.connectButton,
+            this.refreshButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(756, 25);
@@ -190,9 +190,16 @@
             // 
             this.columnHeader5.Text = "Rozmiar";
             // 
-            // timer1
+            // refreshButton
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.refreshButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.refreshButton.Enabled = false;
+            this.refreshButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshButton.Image")));
+            this.refreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(55, 22);
+            this.refreshButton.Text = "Odśwież";
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // MainShareForm
             // 
@@ -230,7 +237,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button downloadButton;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripButton refreshButton;
     }
 }
 

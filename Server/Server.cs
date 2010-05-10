@@ -39,8 +39,6 @@ namespace DeadAlbatross.Server
         [OperationContract]
         public string[] RequestDownload(string hash)
         {
-
-
             Share index = new Share { Hash = hash };
             string[] result = new string[_shares[index].Count];
             _shares[index].CopyTo(result);

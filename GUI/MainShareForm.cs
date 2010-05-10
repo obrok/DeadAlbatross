@@ -63,15 +63,17 @@ namespace DeadAlbatross.GUI
             if (connectButton.Checked)
             {
                 connectButton.Text = "Rozłącz";
-                timer1.Start();
+                refreshButton.Enabled = true;
+                shares = LoadShares();
             }
             else
             {
                 connectButton.Text = "Połącz";
-                timer1.Stop();
+                refreshButton.Enabled = false;
                 shares.Clear();
-                ReloadShares();
             }
+
+            ReloadShares();
         }
 
         private void ReloadShares()
@@ -115,7 +117,7 @@ namespace DeadAlbatross.GUI
             string[] addresses = client.RequestDownload(hash);
 
             System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();            
-            Uri baseAddress = new Uri("http://127.0.0.1:1337/DeadAlbatross/Client/DeadAlbatrossClient");
+            Uri baseAddress = new Uri("http://"+addresses[0]+":1337/DeadAlbatross/Client/DeadAlbatrossClient");
             System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress(baseAddress);
 
             byte[] bytes = new ClientImplementationClient(binding, address).Download(hash);
@@ -137,8 +139,9 @@ namespace DeadAlbatross.GUI
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void refreshButton_Click(object sender, EventArgs e)
         {
+            downloadButton.Enabled = false;
             shares = LoadShares();
             ReloadShares();
         }
