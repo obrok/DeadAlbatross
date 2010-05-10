@@ -156,6 +156,7 @@
             // 
             // downloadButton
             // 
+            this.downloadButton.Enabled = false;
             this.downloadButton.Location = new System.Drawing.Point(6, 367);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(75, 23);
@@ -179,6 +180,7 @@
             this.sharesListView.TabIndex = 0;
             this.sharesListView.UseCompatibleStateImageBehavior = false;
             this.sharesListView.View = System.Windows.Forms.View.Details;
+            this.sharesListView.SelectedIndexChanged += new System.EventHandler(this.sharesListView_SelectedIndexChanged);
             // 
             // columnHeader4
             // 

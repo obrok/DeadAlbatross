@@ -120,8 +120,6 @@ namespace DeadAlbatross.GUI
             string hash = shares[sharesListView.SelectedIndices[0]].Hash;
             string[] addresses = client.RequestDownload(hash);
 
-            
-
             System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();            
             Uri baseAddress = new Uri("http://127.0.0.1:1337/DeadAlbatross/Client/DeadAlbatrossClient");
             System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress(baseAddress);
@@ -131,8 +129,18 @@ namespace DeadAlbatross.GUI
             {
                 file.Write(bytes, 0, bytes.Length);
             }
+        }
 
-            MessageBox.Show(addresses[0]);
+        private void sharesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sharesListView.SelectedItems.Count == 0)
+            {
+                downloadButton.Enabled = false;
+            }
+            else
+            {
+                downloadButton.Enabled = true;
+            }
         }
     }
 }
