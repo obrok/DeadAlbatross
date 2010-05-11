@@ -114,14 +114,32 @@ namespace DeadAlbatross.GUI
 
         private void downloadButton_Click(object sender, EventArgs e)
         {
-            string hash = shares[sharesListView.SelectedIndices[0]].Hash;
+            Share share = shares[sharesListView.SelectedIndices[0]];
+            string hash = share.Hash;
             string[] addresses = client.RequestDownload(hash);
 
             System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();            
             Uri baseAddress = new Uri("http://"+addresses[0]+":1337/DeadAlbatross/Client/DeadAlbatrossClient");
             System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress(baseAddress);
 
-            byte[] bytes = new ClientImplementationClient(binding, address).Download(hash);
+            ClientImplementationClient cic = new ClientImplementationClient(binding, address);
+
+            int bytesRead = 0;
+            byte[] bytes = new byte[share.Size];
+
+            while (bytesRead < share.Size)
+            {
+                byte[] chunk = cic.Download(hash, bytesRead);
+
+                for (int i = 0; i < chunk.Length; i++)
+                {
+                    bytes[bytesRead + i] = chunk[i];
+                }
+                bytesRead += chunk.Length;
+            }
+            
+
+            //byte[] bytes = new ClientImplementationClient(binding, address).Download(hash);
             using (var file = System.IO.File.Create(shares[sharesListView.SelectedIndices[0]].Name))
             {
                 file.Write(bytes, 0, bytes.Length);

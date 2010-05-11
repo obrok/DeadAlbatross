@@ -16,7 +16,7 @@ public interface ClientImplementation
 {
     
     [System.ServiceModel.OperationContractAttribute(Action="http://DeadAlbatross.Client/ClientImplementation/Download", ReplyAction="http://DeadAlbatross.Client/ClientImplementation/DownloadResponse")]
-    byte[] Download(string hash);
+    byte[] Download(string hash, int bytesRead);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -53,8 +53,8 @@ public partial class ClientImplementationClient : System.ServiceModel.ClientBase
     {
     }
     
-    public byte[] Download(string hash)
+    public byte[] Download(string hash, int bytesRead)
     {
-        return base.Channel.Download(hash);
+        return base.Channel.Download(hash, bytesRead);
     }
 }
