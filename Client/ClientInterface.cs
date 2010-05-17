@@ -10,13 +10,14 @@
 
 
 
+using System.IO;
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
 [System.ServiceModel.ServiceContractAttribute(Namespace="http://DeadAlbatross.Client", ConfigurationName="ClientImplementation")]
 public interface ClientImplementation
 {
     
     [System.ServiceModel.OperationContractAttribute(Action="http://DeadAlbatross.Client/ClientImplementation/Download", ReplyAction="http://DeadAlbatross.Client/ClientImplementation/DownloadResponse")]
-    byte[] Download(string hash, int bytesRead);
+    Stream Download(string hash);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -53,8 +54,8 @@ public partial class ClientImplementationClient : System.ServiceModel.ClientBase
     {
     }
     
-    public byte[] Download(string hash, int bytesRead)
+    public Stream Download(string hash)
     {
-        return base.Channel.Download(hash, bytesRead);
+        return base.Channel.Download(hash);
     }
 }

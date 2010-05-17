@@ -18,7 +18,11 @@ namespace DeadAlbatross.GUI
 
             try
             {
-                selfHost.AddServiceEndpoint(typeof(DeadAlbatross.Client.ClientImplementation), new WSHttpBinding(), "DeadAlbatrossClient");
+                BasicHttpBinding binding = new BasicHttpBinding();
+                binding.MessageEncoding = WSMessageEncoding.Mtom;
+                binding.TransferMode = TransferMode.StreamedResponse;
+                selfHost.AddServiceEndpoint(typeof(DeadAlbatross.Client.ClientImplementation), binding, "DeadAlbatrossClient");
+                binding.MaxReceivedMessageSize = long.MaxValue;
 
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
                 smb.HttpGetEnabled = true;

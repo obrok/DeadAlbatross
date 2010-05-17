@@ -18,24 +18,10 @@ namespace DeadAlbatross.Client
         }
 
         [OperationContract]
-        public byte[] Download(string hash, int bytesRead)
+        public Stream Download(string hash)
         {
-            int chunkSize = 10000;
-
-            FileStream fs = System.IO.File.OpenRead((files[hash]));
-            fs.Seek(bytesRead, SeekOrigin.Begin);
-
-            long left = new FileInfo(files[hash]).Length - (long)bytesRead;
-            long toRead = chunkSize;
-            if (left < chunkSize)
-            {
-                toRead = left;
-            }
-
-            byte[] buffer = new byte[toRead];
-            fs.Read(buffer, 0, (int)toRead);
-            fs.Close();
-            return buffer;
+            FileStream stream = File.OpenRead(files[hash]);
+            return stream;
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DeadAlbatross.Commons;
 using DeadAlbatross.Client;
 using System.ServiceModel.Channels;
+using System.IO;
 
 namespace DeadAlbatross.GUI
 {
@@ -140,31 +141,53 @@ namespace DeadAlbatross.GUI
             string hash = share.Hash;
             string[] addresses = client.RequestDownload(hash);
 
-            System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();            
+            System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
+            binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Mtom;
+            binding.TransferMode = System.ServiceModel.TransferMode.StreamedResponse;
+            binding.MaxReceivedMessageSize = long.MaxValue;
+            
             Uri baseAddress = new Uri("http://"+addresses[0]+":1337/DeadAlbatross/Client/DeadAlbatrossClient");
             System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress(baseAddress);
 
             ClientImplementationClient cic = new ClientImplementationClient(binding, address);
 
-            int bytesRead = 0;
-            byte[] bytes = new byte[share.Size];
-
-            while (bytesRead < share.Size)
+            using (var input = cic.Download(hash))
             {
-                byte[] chunk = cic.Download(hash, bytesRead);
-
-                for (int i = 0; i < chunk.Length; i++)
+                using (var file = System.IO.File.Create(shares[sharesListView.SelectedIndices[0]].Name))
                 {
-                    bytes[bytesRead + i] = chunk[i];
+                    byte[] bytes = ReadFully(input);
+                    file.Write(bytes, 0, bytes.Length);
                 }
-                bytesRead += chunk.Length;
             }
-            
+        }
 
-            //byte[] bytes = new ClientImplementationClient(binding, address).Download(hash);
-            using (var file = System.IO.File.Create(shares[sharesListView.SelectedIndices[0]].Name))
+        public static void ReadWholeArray(Stream stream, byte[] data)
+        {
+            int offset = 0;
+            int remaining = data.Length;
+            while (remaining > 0)
             {
-                file.Write(bytes, 0, bytes.Length);
+                int read = stream.Read(data, offset, remaining);
+                if (read <= 0)
+                    throw new EndOfStreamException
+                        (String.Format("End of stream reached with {0} bytes left to read", remaining));
+                remaining -= read;
+                offset += read;
+            }
+        }
+
+        public static byte[] ReadFully(Stream stream)
+        {
+            byte[] buffer = new byte[32768];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                while (true)
+                {
+                    int read = stream.Read(buffer, 0, buffer.Length);
+                    if (read <= 0)
+                        return ms.ToArray();
+                    ms.Write(buffer, 0, read);
+                }
             }
         }
 
