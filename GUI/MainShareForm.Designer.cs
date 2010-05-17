@@ -46,6 +46,8 @@
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.Hash = new System.Windows.Forms.ColumnHeader();
+            this.serverAddressTextbox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -103,10 +105,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 28);
+            this.tabControl1.Location = new System.Drawing.Point(12, 50);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(732, 440);
+            this.tabControl1.Size = new System.Drawing.Size(732, 418);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
@@ -115,7 +117,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(724, 414);
+            this.tabPage1.Size = new System.Drawing.Size(724, 392);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Udostępniane";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -132,7 +134,7 @@
             this.columnHeader6});
             this.localSharesListView.Location = new System.Drawing.Point(6, 6);
             this.localSharesListView.Name = "localSharesListView";
-            this.localSharesListView.Size = new System.Drawing.Size(712, 402);
+            this.localSharesListView.Size = new System.Drawing.Size(712, 380);
             this.localSharesListView.TabIndex = 2;
             this.localSharesListView.UseCompatibleStateImageBehavior = false;
             this.localSharesListView.View = System.Windows.Forms.View.Details;
@@ -207,11 +209,30 @@
             // 
             this.Hash.Text = "Hash";
             // 
+            // serverAddressTextbox
+            // 
+            this.serverAddressTextbox.Location = new System.Drawing.Point(102, 24);
+            this.serverAddressTextbox.Name = "serverAddressTextbox";
+            this.serverAddressTextbox.Size = new System.Drawing.Size(327, 20);
+            this.serverAddressTextbox.TabIndex = 4;
+            this.serverAddressTextbox.Text = "localhost";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Adres serwera:";
+            // 
             // MainShareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 480);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.serverAddressTextbox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "MainShareForm";
@@ -245,6 +266,8 @@
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.ToolStripButton refreshButton;
         private System.Windows.Forms.ColumnHeader Hash;
+        private System.Windows.Forms.TextBox serverAddressTextbox;
+        private System.Windows.Forms.Label label1;
     }
 }
 

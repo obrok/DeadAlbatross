@@ -22,7 +22,6 @@ namespace DeadAlbatross.GUI
         {
             localShares = new HashSet<LocalShare>();
             shares = new List<Share>();
-            client = new ServerClient();
             
             InitializeComponent();
         }
@@ -62,18 +61,41 @@ namespace DeadAlbatross.GUI
         {
             if (connectButton.Checked)
             {
-                connectButton.Text = "Rozłącz";
-                refreshButton.Enabled = true;
-                shares = LoadShares();
+                Connect();
             }
             else
             {
-                connectButton.Text = "Połącz";
-                refreshButton.Enabled = false;
-                shares.Clear();
+                Disconnect();
             }
 
             ReloadShares();
+        }
+
+        private void Disconnect()
+        {
+            if (client != null)
+            {
+                client.Close();
+            }
+            connectButton.Text = "Połącz";
+            refreshButton.Enabled = false;
+            shares.Clear();
+
+            serverAddressTextbox.Enabled = true;
+        }
+
+        private void Connect()
+        {
+            System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
+            Uri baseAddress = new Uri("http://" + serverAddressTextbox.Text + ":1337/DeadAlbatross/Server/DeadAlbatrossServer");
+            System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress(baseAddress);
+            client = new ServerClient(binding, address);
+
+            connectButton.Text = "Rozłącz";
+            refreshButton.Enabled = true;
+            shares = LoadShares();
+
+            serverAddressTextbox.Enabled = false;
         }
 
         private void ReloadShares()
