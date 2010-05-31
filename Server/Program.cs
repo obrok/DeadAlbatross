@@ -16,7 +16,7 @@ namespace DeadAlbatross.Server
 
             try
             {
-                selfHost.AddServiceEndpoint(typeof(Server), new WSHttpBinding(), "DeadAlbatrossServer");
+                selfHost.AddServiceEndpoint(typeof(Server), new BasicHttpBinding(), "DeadAlbatrossServer");
 
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
                 smb.HttpGetEnabled = true;

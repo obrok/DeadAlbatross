@@ -87,7 +87,7 @@ namespace DeadAlbatross.GUI
 
         private void Connect()
         {
-            System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
+            System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
             Uri baseAddress = new Uri("http://" + serverAddressTextbox.Text + ":1337/DeadAlbatross/Server/DeadAlbatrossServer");
             System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress(baseAddress);
             client = new ServerClient(binding, address);

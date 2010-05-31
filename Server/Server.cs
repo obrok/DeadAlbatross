@@ -2,6 +2,8 @@
 using System.ServiceModel;
 using DeadAlbatross.Commons;
 using System.ServiceModel.Channels;
+using System.IO;
+using System;
 namespace DeadAlbatross.Server
 {
     [ServiceContract(Namespace = "http://DeadAlbatross.Server")]
@@ -42,6 +44,9 @@ namespace DeadAlbatross.Server
             Share index = new Share { Hash = hash };
             string[] result = new string[_shares[index].Count];
             _shares[index].CopyTo(result);
+
+            Console.WriteLine(result[0]);
+
             return result;
         }
     }
