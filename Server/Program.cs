@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.Configuration;
 
 namespace DeadAlbatross.Server
 {
@@ -11,16 +12,14 @@ namespace DeadAlbatross.Server
     {
         static void Main(string[] args)
         {
-            Uri baseAddress = new Uri("http://localhost:1337/DeadAlbatross/Server");
-            ServiceHost selfHost = new ServiceHost(typeof(Server), baseAddress);
+            ServiceHost selfHost = new ServiceHost(typeof(Server), Commons.Config.BaseAddress("Server"));
 
             try
             {
-                selfHost.AddServiceEndpoint(typeof(Server), new BasicHttpBinding(), "DeadAlbatrossServer");
-
-                ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-                smb.HttpGetEnabled = true;
-                selfHost.Description.Behaviors.Add(smb);
+                selfHost.AddServiceEndpoint(
+                    typeof(Server),
+                    new BasicHttpBinding("BasicHttpBinding_Server"),
+                    ConfigurationSettings.AppSettings["ServerSuffix"]);
 
                 selfHost.Open();
                 Console.WriteLine("The server is running.");

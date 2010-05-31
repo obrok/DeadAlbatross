@@ -6,6 +6,7 @@ using System.IO;
 using System;
 namespace DeadAlbatross.Server
 {
+    [ServiceBehavior(ConfigurationName="metadataSupport")]
     [ServiceContract(Namespace = "http://DeadAlbatross.Server")]
     class Server
     {

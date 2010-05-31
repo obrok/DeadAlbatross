@@ -6,6 +6,8 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using DeadAlbatross.Client;
 using System.Threading;
+using DeadAlbatross.Commons;
+using System.Configuration;
 
 namespace DeadAlbatross.GUI
 {
@@ -13,20 +15,16 @@ namespace DeadAlbatross.GUI
     {
         static void Init()
         {
-            Uri baseAddress = new Uri("http://localhost:1337/DeadAlbatross/Client");
-            ServiceHost selfHost = new ServiceHost(typeof(DeadAlbatross.Client.ClientImplementation), baseAddress);
+            ServiceHost selfHost = new ServiceHost(
+                typeof(DeadAlbatross.Client.ClientImplementation),
+                Config.BaseAddress("Client"));
 
             try
             {
-                BasicHttpBinding binding = new BasicHttpBinding();
-                binding.MessageEncoding = WSMessageEncoding.Mtom;
-                binding.TransferMode = TransferMode.StreamedResponse;
-                selfHost.AddServiceEndpoint(typeof(DeadAlbatross.Client.ClientImplementation), binding, "DeadAlbatrossClient");
-                binding.MaxReceivedMessageSize = long.MaxValue;
-
-                ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-                smb.HttpGetEnabled = true;
-                selfHost.Description.Behaviors.Add(smb);
+                selfHost.AddServiceEndpoint(
+                    typeof(DeadAlbatross.Client.ClientImplementation),
+                    new BasicHttpBinding("BasicHttpBinding_Client"),
+                    ConfigurationSettings.AppSettings["ClientSuffix"]);
 
                 new Thread(new ThreadStart(selfHost.Open)).Start();
             }

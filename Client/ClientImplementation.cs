@@ -7,6 +7,7 @@ using System.IO;
 
 namespace DeadAlbatross.Client
 {
+    [ServiceBehavior(ConfigurationName="metadataSupport")]
     [ServiceContract(Namespace = "http://DeadAlbatross.Client")]
     public class ClientImplementation
     {
