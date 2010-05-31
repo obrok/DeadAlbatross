@@ -8,11 +8,14 @@ using DeadAlbatross.Client;
 using System.Threading;
 using DeadAlbatross.Commons;
 using System.Configuration;
+using log4net;
 
 namespace DeadAlbatross.GUI
 {
     static class Program
     {
+        private static ILog _log = LogManager.GetLogger(typeof(Program).Name);
+
         static void Init()
         {
             ServiceHost selfHost = new ServiceHost(
