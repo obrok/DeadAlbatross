@@ -23,12 +23,16 @@ namespace DeadAlbatross.Commons
 
         public static Uri ServerBaseAddress(object address)
         {
-            return new Uri(Format(address, _port, "Server") + ConfigurationSettings.AppSettings["ServerSuffix"]);
+            return new Uri(
+                Format(address, _port, "Server") + 
+                ConfigurationSettings.AppSettings["ServerSuffix"]);
         }
 
         public static Uri ClientBaseAddress(object address)
         {
-            return new Uri(Format(address, _port, "Client") + ConfigurationSettings.AppSettings["ClientSuffix"]);
+            return new Uri(
+                Format(address, _port, "Client") + 
+                ConfigurationSettings.AppSettings["ClientSuffix"]);
         }
     }
 }

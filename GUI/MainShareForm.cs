@@ -140,15 +140,12 @@ namespace DeadAlbatross.GUI
             string hash = share.Hash;
             string[] addresses = client.RequestDownload(hash);
 
-            System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
-            binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Mtom;
-            binding.TransferMode = System.ServiceModel.TransferMode.StreamedResponse;
-            binding.MaxReceivedMessageSize = long.MaxValue;
-            
-            Uri baseAddress = new Uri("http://"+addresses[0]+":1337/DeadAlbatross/Client/DeadAlbatrossClient");
-            System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress(baseAddress);
+            System.ServiceModel.BasicHttpBinding binding = 
+                new System.ServiceModel.BasicHttpBinding("BasicHttpBinding_Client");
 
-            ClientImplementationClient cic = new ClientImplementationClient(binding, address);
+            ClientImplementationClient cic = 
+                new ClientImplementationClient(binding, 
+                    new System.ServiceModel.EndpointAddress(Config.ClientBaseAddress(addresses[0])));
 
             using (var input = cic.Download(hash))
             {
