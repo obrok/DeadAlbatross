@@ -33,7 +33,7 @@ namespace DeadAlbatross.GUI
             }
             catch (CommunicationException ce)
             {
-                Console.WriteLine("An exception occurred: {0}", ce.Message);
+                _log.FatalFormat("An exception occurred: {0}", ce.Message);
                 selfHost.Abort();
             }
         }

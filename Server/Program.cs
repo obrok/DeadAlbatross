@@ -5,11 +5,14 @@ using System.Text;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Configuration;
+using log4net;
 
 namespace DeadAlbatross.Server
 {
     class Program
     {
+        private static ILog _log = LogManager.GetLogger(typeof(Program).Name);
+
         static void Main(string[] args)
         {
             ServiceHost selfHost = new ServiceHost(typeof(Server), Commons.Config.BaseAddress("Server"));
@@ -22,16 +25,16 @@ namespace DeadAlbatross.Server
                     ConfigurationSettings.AppSettings["ServerSuffix"]);
 
                 selfHost.Open();
-                Console.WriteLine("The server is running.");
-                Console.WriteLine("Press <ENTER> to terminate service.");
-                Console.WriteLine();
+                
+                _log.Info("The server is running.");
+                _log.Info("Waiting for <ENTER> to terminate service.");
                 Console.ReadLine();
 
                 selfHost.Close();
             }
             catch (CommunicationException ce)
             {
-                Console.WriteLine("An exception occurred: {0}", ce.Message);
+                _log.FatalFormat("An exception occurred: {0}", ce.Message);
                 selfHost.Abort();
             }
         }
