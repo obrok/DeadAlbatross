@@ -244,6 +244,9 @@ namespace DeadAlbatross.GUI
                     new ClientImplementationClient(binding,
                         new System.ServiceModel.EndpointAddress(Config.ClientBaseAddress(addresses[0])));
 
+
+                DateTime time = DateTime.Now;
+
                 using (var input = cic.Download(hash))
                 {
                     using (var file = System.IO.File.Create(shares[sharesListView.SelectedIndices[0]].Name))
@@ -253,7 +256,9 @@ namespace DeadAlbatross.GUI
                     }
                 }
 
-                MessageBox.Show("Download complete", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                double d = share.Size / (DateTime.Now - time).Seconds / 1024.0;
+
+                MessageBox.Show(String.Format("Download complete, speed: {0} Kb/s", d), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {
