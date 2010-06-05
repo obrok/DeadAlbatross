@@ -57,17 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainShareForm.cs">
+    <Compile Include="MainController.cs" />
+    <Compile Include="MainModel.cs" />
+    <Compile Include="MainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainShareForm.Designer.cs">
-      <DependentUpon>MainShareForm.cs</DependentUpon>
+    <Compile Include="MainView.Designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
     <Compile Include="LocalShare.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainShareForm.resx">
-      <DependentUpon>MainShareForm.cs</DependentUpon>
+    <EmbeddedResource Include="MainView.resx">
+      <DependentUpon>MainView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

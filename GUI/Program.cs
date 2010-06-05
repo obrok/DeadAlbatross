@@ -48,7 +48,7 @@ namespace DeadAlbatross.GUI
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainShareForm());
+            Application.Run(new MainView());
         }
     }
 }
